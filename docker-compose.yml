@@ -1,0 +1,26 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  user:
+    image: golang:1.14-alpine
+    command: go run user/main.go
+    ports:
+      - 8092:8092
+      - 8082:8082
+    working_dir: /root/
+    volumes:
+      - .:/root
+  graphite:
+    image: graphiteapp/graphite-statsd
+    ports:
+      - 80:80
+      - 8125:8125/udp
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000

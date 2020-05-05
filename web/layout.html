@@ -1,0 +1,28 @@
+{{ block "layout" .}}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css">
+	<title>{{ template "title" }}</title>
+</head>
+<body>
+	<div class="pure-menu pure-menu-horizontal">
+	    <ul class="pure-menu-list">
+	        <li class="pure-menu-item"><a href="/" class="pure-menu-link">Фильмы</a></li>
+	        <li class="pure-menu-item">
+	        	{{if eq .User.ID 0 }}
+	        		Вы не залогинены
+	        	{{ else }}
+	        		Привет, {{.User.Name}}!
+	        		{{if not .User.IsPaid}}
+	        			<a href="{{.PayURL}}">Оформить подписку</a>
+	        		{{end}}
+	        	{{end}}
+	        </li>
+	    </ul>
+	</div>
+	{{ template "content" .}}
+</table>
+</body>
+</html>
+{{ end }}

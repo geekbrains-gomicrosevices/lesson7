@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name: 'user'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['user:8092']

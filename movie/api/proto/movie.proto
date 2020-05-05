@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package moviegrpc;
+
+service Movie {
+    rpc GetMovie(GetMovieRequest) returns (GetMovieResponse) {}
+    rpc MovieList(MovieListRequest) returns (MovieListResponse) {}
+}
+
+message MovieListRequest {}
+message MovieListResponse {
+	repeated GetMovieResponse movies = 1;
+}
+
+message GetMovieRequest {
+    int64 id = 1;
+}
+
+message GetMovieResponse {
+    int64  id = 1;
+    string name = 2;
+    string poster = 3;
+    string movie_url = 4;
+    bool   is_paid = 5;
+}
